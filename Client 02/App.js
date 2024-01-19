@@ -1,30 +1,50 @@
-import React from 'react';
-import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from './src/views/screens/HomeScreen';
-import DetailsScreen from './src/views/screens/DetailsScreen';
-import {StatusBar} from 'react-native';
-import COLORS from './src/consts/colors';
-import Login from './src/login/Login';
-import Register from './src/login/Register';
-import Addtocart from './src/views/screens/Addtocart';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View } from 'react-native';
+import Header from './Component/Header';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Footer from './Component/Footer';
+import Home from './Component/Home';
+import ProductDetail from './Component/detailProduct/ProductDetail';
+import Login from './Component/Login';
+import CartPage from './Component/cartProduct/CartPage';
+import SettingsScreen from './Component/setting/SettingsScreen';
+import Register from './Component/Register';
+import RegisterSuccess from './Component/RegisterSuccess';
+// import ProductJewelery from './Component/category/ProductJewelery';
+import PhoneCategory from './Component/category/Category';
+import PaymentScreen from './Component/payment/PaymentScreen';
+import PaymentSuccess from './Component/payment/PaymentSuccess';
 
 const Stack = createStackNavigator();
 
-const App = () => {
+function App() {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Header />
+      <Stack.Navigator initialRouteName="Register">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="ProductDetail" component={ProductDetail} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="CartPage" component={CartPage} />
+        <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+        <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} />
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="Addtocart" component={Addtocart} />
-        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        <Stack.Screen name="RegisterSuccess" component={RegisterSuccess} />
+        <Stack.Screen name="Category" component={PhoneCategory} />
+        {/* <Stack.Screen name="Category" component={ProductJewelery} /> */}
       </Stack.Navigator>
+      <Footer />
     </NavigationContainer>
   );
-};
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
 
 export default App;
